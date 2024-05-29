@@ -28,9 +28,9 @@
             <div class="col">
                 <input type="hidden" name="lokasi" id="lokasi">
                 <div class="webcam-capture"></div>
+                <button id="takeabsen" class="btn btn-primary btn-block btn-masuk" type="button"><ion-icon name="camera-outline"></ion-icon>Masuk</button>
             </div>
         </div>
-            <button class="btn btn-primary btn-block btn-masuk" type="submit">Masuk</button>
         <div class="row">
             <div class="col">
                 <div id="map"></div>
@@ -56,7 +56,7 @@
 
     function successCallback(position) {
         lokasi.value = position.coords.latitude + ", " + position.coords.longitude;
-        var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
+        var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 14);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -74,5 +74,30 @@
         console.error('Error getting location:', error);
         lokasi.value = "Unable to retrieve location";
     }
+
+    $("#takeabsen").click(function(e) {
+        Webcam.snap(function(uri) {
+            image = uri
+        });
+        var lokasi = $('#lokasi').val();
+        
+        $.ajax({
+            type : 'POST',
+            url : 'storage',
+            data : {
+                _token : "{{ csrf_token() }}",
+                image : image,
+                lokasi : lokasi
+            },
+            cache : false,
+            success : function(respond) {
+                if(respond == 1) {
+                    alert('success')
+                }else {
+                    alert('Gagal')
+                }
+            }
+        })
+    })
 </script>
 @endpush
