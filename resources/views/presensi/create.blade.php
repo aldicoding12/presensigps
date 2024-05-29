@@ -29,13 +29,12 @@
                 <input type="hidden" name="lokasi" id="lokasi">
                 <div class="webcam-capture"></div>
             </div>
-            <button class="btn btn-primary btn-block" type="button">Button</button>
-            <div class="row">
-                <div class="col">
-                    <div id="map" style="height: 500px;"></div>
-                </div>
-            </div>
         </div>
+            <button class="btn btn-primary btn-block btn-masuk" type="submit">Masuk</button>
+        <div class="row">
+            <div class="col">
+                <div id="map"></div>
+            </div>
     </div>
     <!-- * App Capsule -->
 @endsection
@@ -63,6 +62,12 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+        var circle = L.circle([position.coords.latitude, position.coords.longitude], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 500
+    }).addTo(map);
     }
 
     function errorCallback(error) {

@@ -8100,4 +8100,13 @@ body.dark-mode-active .cart-item .cart-item-footer {
   height: auto !important;
   border-radius: 15px !important;
 }
-#map { height: 180px; }
+
+.btn-masuk {
+  margin-top: -11.5rem;
+}
+#map { 
+  height: 180px;
+  margin-top: -8rem;
+ }
+
+
